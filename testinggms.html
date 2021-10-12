@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>GMS is opening</title>
+    </head>
+    <body style="text-align:center;">
+        <br />
+        <br />
+        <h1 id="headerText">Loading in GMS</h1>
+        <p id="infoText">Please wait while GMS is loading your content. Once it starts loading, you can close this window.</p>
+    </body>
+    <script>
+        var params = new URLSearchParams(document.location.search);
+        console.log(document.location.search);
+        if (params.has('uri') && params.get('uri')) {
+            const uri = document.location.search.replace('?uri=', '');
+            console.log('Forwarding to ' + uri);
+            const launchWindow = window.open(uri, "_self");
+            setTimeout(function() { launchWindow.close(); }, 1000);
+        } else {
+            console.warn('No URI supplied in forward request.');
+            document.getElementById('headerText').textContent = 'An error occurred';
+            document.getElementById('infoText').textContent = 'Please contact the GMS helpdesk - please share steps on how this screen loaded.';
+        }
+    </script>
+</html>
